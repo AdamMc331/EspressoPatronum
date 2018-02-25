@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">EspressoPatronum</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="register">Register</string>
+    <string name="err_empty_phone_number">Must enter a phone number.</string>
+    <string name="err_empty_email_address">Must enter an email address.</string>
+    <string name="err_empty_last_name">Must enter a last name.</string>
+    <string name="err_empty_first_name">Must enter a first name.</string>
+    <string name="welcome">WELCOME!</string>
+    <string name="err_invalid_email">Must enter a valid email address.</string>
+    <string name="err_invalid_phone_number">Must enter a valid phone number.</string>
+</resources>
