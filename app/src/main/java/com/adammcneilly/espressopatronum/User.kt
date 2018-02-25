@@ -18,5 +18,5 @@ data class User(
 
     // https://stackoverflow.com/a/5115433/3131147
     val formattedPhoneNumber: String
-        get() = phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1)-$2-$3")
+        get() = "(${phoneNumber.substring(0, 3)})-${phoneNumber.substring(3, 6)}-${phoneNumber.substring(6)}"
 }
