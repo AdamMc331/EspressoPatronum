@@ -317,3 +317,51 @@ Spoon will run all of our instrumentation tests and build us a static HTML repor
 ![inline](images/test_invalid_email_error.png)
 
 ^ This is an example of what a Spoon report would look like. What you're seeing here is our invalid email test with a screenshot of each step along the way. If I hover over a picture I'll see a description of that step. 
+
+---
+
+# When To Take Screenshots
+
+* After assertions
+* Before actions - unless that action leads to another screen
+* On failure
+
+[.build-lists: true]
+
+---
+
+# Adding Screenshots To Our Robot
+
+```kotlin
+fun firstName(firstName: String): RegistrationRobot {
+    onView(FIRST_NAME_INPUT_MATCHER).perform(clearText(), typeText(firstName), closeSoftKeyboard())
+    takeScreenshot(spoon, "first_name_entered")
+    return this
+}
+
+fun register(): RegistrationRobot {
+    takeScreenshot(spoon, "register_clicked")
+    onView(REGISTER_INPUT_MATCHER).perform(click())
+    return this
+}
+
+fun setFailureHandler(spoon: SpoonRule, context: Context) {
+    Espresso.setFailureHandler { error, viewMatcher ->
+        takeScreenshot(spoon, "test_failed")
+        DefaultFailureHandler(context).handle(error, viewMatcher)
+    }
+}
+```
+
+^ Since we already have each step broken out into a method in our robot, we can just add a screenshot to each one with a description. You can find the actual source code for this on GitHub which I'll like to at the end, if you're curious what the takeScreenshot method looks like. See how this follows along with what was discussed on the last slide.
+
+---
+
+# Takeaways
+
+1. Use the robot pattern to make your tests more maintainable.
+2. Your actual tests become easier and quicker to write once you've created a robot.
+3. Robots can be leveraged for additional and more thorough. 
+4. This idea is not specific to Espresso or Spoon.
+
+---
