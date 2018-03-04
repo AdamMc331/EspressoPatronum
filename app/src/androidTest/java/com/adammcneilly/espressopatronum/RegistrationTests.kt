@@ -1,10 +1,5 @@
 package com.adammcneilly.espressopatronum
 
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.action.ViewActions.typeText
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import org.junit.Rule
@@ -23,35 +18,35 @@ class RegistrationTests {
 
     @Test
     fun testSuccessfulRegistration() {
-        onView(withId(R.id.etFirstName)).perform(typeText("Adam"))
-        onView(withId(R.id.etLastName)).perform(typeText("McNeilly"))
-        onView(withId(R.id.etEmail)).perform(typeText("amcneilly@okcupid.com"))
-        onView(withId(R.id.etPhone)).perform(typeText("1234567890"))
-        onView(withId(R.id.registerButton)).perform(click())
-
-        onView(withId(R.id.tvFullName)).check(matches(withText("Adam McNeilly")))
-        onView(withId(R.id.tvEmailAddress)).check(matches(withText("amcneilly@okcupid.com")))
-        onView(withId(R.id.tvPhoneNumber)).check(matches(withText("(123)-456-7890")))
+        RegistrationRobot()
+                .firstName("Adam")
+                .lastName("McNeilly")
+                .email("amcneilly@okcupid.com")
+                .phone("1234567890")
+                .register()
+                .assertFullNameDisplay("Adam McNeilly")
+                .assertEmailDisplay("amcneilly@okcupid.com")
+                .assertPhoneDisplay("(123)-456-7890")
     }
 
     @Test
     fun testMissingEmailError() {
-        onView(withId(R.id.etFirstName)).perform(typeText("Adam"))
-        onView(withId(R.id.etLastName)).perform(typeText("McNeilly"))
-        onView(withId(R.id.etPhone)).perform(typeText("1234567890"))
-        onView(withId(R.id.registerButton)).perform(click())
-
-        onView(withId(R.id.etEmail)).check(matches(hasErrorText("Must enter an email address.")))
+        RegistrationRobot()
+                .firstName("Adam")
+                .lastName("McNeilly")
+                .phone("1234567890")
+                .register()
+                .assertEmailError("Must enter an email address.")
     }
 
     @Test
     fun testInvalidEmailError() {
-        onView(withId(R.id.etFirstName)).perform(typeText("Adam"))
-        onView(withId(R.id.etLastName)).perform(typeText("McNeilly"))
-        onView(withId(R.id.etEmail)).perform(typeText("blahblah"))
-        onView(withId(R.id.etPhone)).perform(typeText("1234567890"))
-        onView(withId(R.id.registerButton)).perform(click())
-
-        onView(withId(R.id.etEmail)).check(matches(hasErrorText("Must enter a valid email address.")))
+        RegistrationRobot()
+                .firstName("Adam")
+                .lastName("McNeilly")
+                .email("blahblah")
+                .phone("1234567890")
+                .register()
+                .assertEmailError("Must enter a valid email address.")
     }
 }
