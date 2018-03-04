@@ -2,6 +2,9 @@ package com.adammcneilly.espressopatronum
 
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import com.adammcneilly.espressopatronum.TestUtils.setFailureHandler
+import com.squareup.spoon.SpoonRule
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,9 +19,18 @@ class RegistrationTests {
     @Rule
     val rule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
 
+    @JvmField
+    @Rule
+    val spoon: SpoonRule = SpoonRule()
+
+    @Before
+    fun setup() {
+        setFailureHandler(spoon, rule.activity)
+    }
+
     @Test
     fun testSuccessfulRegistration() {
-        RegistrationRobot()
+        RegistrationRobot(spoon)
                 .firstName("Adam")
                 .lastName("McNeilly")
                 .email("amcneilly@okcupid.com")
@@ -31,7 +43,7 @@ class RegistrationTests {
 
     @Test
     fun testMissingEmailError() {
-        RegistrationRobot()
+        RegistrationRobot(spoon)
                 .firstName("Adam")
                 .lastName("McNeilly")
                 .phone("1234567890")
@@ -41,7 +53,7 @@ class RegistrationTests {
 
     @Test
     fun testInvalidEmailError() {
-        RegistrationRobot()
+        RegistrationRobot(spoon)
                 .firstName("Adam")
                 .lastName("McNeilly")
                 .email("blahblah")

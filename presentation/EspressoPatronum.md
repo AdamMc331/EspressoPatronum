@@ -29,6 +29,8 @@ footer: @AdamMc331<br/>@NYAndroidMeetup
 2. ViewActions
 3. ViewAssertions
 
+[.build-lists: true]
+
 ---
 
 # ViewMatchers
@@ -206,6 +208,8 @@ fun testInvalidEmailError() {
 
 ^ If we change our view now, we have to go rewrite every test. We've also written such verbose and tough to read code that if we're starting from scratch this doesn't make Espresso seem like so much fun. This is where I gave up the first time.
 
+[.build-lists: true]
+
 ---
 
 # Introducing Robots
@@ -287,3 +291,29 @@ class RegistrationRobot {
 ^ We'll use the builder pattern to write a method for each action our robot can perform. The main benefit of using the builder pattern like this is so we can chain the calls together nicely as seen on the next slide.
 
 ---
+
+# Benefits
+
+1. Readibility
+2. Maintainability
+3. Better Test Reporting
+
+[.build-lists: true]
+
+---
+
+# Better Test Reporting Using Spoon[^3]
+
+Spoon will run all of our instrumentation tests and build us a static HTML report at the end.
+
+^ We can leverage a tool like Spoon to make more effective test reports. Spoon is a library built and maintained by Square.
+
+[^3]: https://github.com/square/spoon
+
+---
+
+# Example Spoon Report
+
+![inline](images/test_invalid_email_error.png)
+
+^ This is an example of what a Spoon report would look like. What you're seeing here is our invalid email test with a screenshot of each step along the way. If I hover over a picture I'll see a description of that step. 
