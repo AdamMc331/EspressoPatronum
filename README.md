@@ -3,7 +3,7 @@ Repository for a sample project used in the Espresso Patronum presentation at Ch
 
 ## Presentation
 
-The presentation was built using [Deckset App](https://www.decksetapp.com/). You can find the markdown [here](presentation/espressopatronum.md). You can find a PDF version of the slides inside the presentation folder as well. I'll do my best to update this each time the slides are changed.
+The presentation was built using [Deckset App](https://www.decksetapp.com/). You can find the markdown [here](presentation/espressopatronum.md). You can find a PDF version of the slides inside the presentation folder [as well](presentation/espressopatronum.pdf). I'll do my best to update this each time the slides are changed.
 
 ## Resources
 

@@ -365,3 +365,9 @@ fun setFailureHandler(spoon: SpoonRule, context: Context) {
 4. This idea is not specific to Espresso or Spoon.
 
 ---
+
+# Repository
+
+* https://github.com/AdamMc331/EspressoPatronum
+
+^ This will take you to a sample project that uses the robot pattern and Spoon for testing. The README will have a link to the various resources used throughout this as well.
