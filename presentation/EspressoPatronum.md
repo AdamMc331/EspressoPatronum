@@ -3,7 +3,7 @@ slidenumbers: true
 autoscale: true
 footer: @AdamMc331<br/>@NYAndroidMeetup
 
-# Espresso Patronum: The Magic of the Robot Pattern
+## Espresso Patronum:<br/>The Magic of the Robot Pattern
 
 ### Adam McNeilly: Android Engineer - OkCupid
 
@@ -28,8 +28,6 @@ footer: @AdamMc331<br/>@NYAndroidMeetup
 1. ViewMatchers
 2. ViewActions
 3. ViewAssertions
-
-[.build-lists: true]
 
 ---
 
@@ -97,7 +95,7 @@ onView(withId(R.id.tvOutput)).check(matches(withText("Adam")))
 
 ![inline](images/sample_recording.gif)
 
-^ To demonstrate how the robot pattern saves us time, we'll consider automating this registration form. It has a registration fragment, which is then replaced by a UserProfile fragment. I also think it's best to explain the robot pattern by first demonstrating the problem it solves.
+^ To demonstrate how the robot pattern saves us time, we'll consider automating this registration form. It has a registration fragment, which is then replaced by a UserProfile fragment. I also think it's best to explain the robot pattern by first demonstrating the problem it solves. Let's consider a couple tests you might write for this. 
 
 ---
 
@@ -118,7 +116,7 @@ fun testSuccessfulRegistration() {
 }
 ```
 
-^ Briefly walk through this example for testing successful registration and call out especially how verbose this is. 
+^ Given how the Espresso docs are written, this is how someone might write a test. Briefly walk through this example for testing successful registration and call out especially how verbose this is. 
 
 ---
 
@@ -296,9 +294,18 @@ class RegistrationRobot {
 
 1. Readibility
 2. Maintainability
-3. Better Test Reporting
 
 [.build-lists: true]
+
+---
+
+# What Else?
+
+---
+
+# Better Test Reporting
+
+Now that we've established the robot pattern for clean and maintainable tests, let's take it a step further.
 
 ---
 
@@ -323,7 +330,7 @@ Spoon will run all of our instrumentation tests and build us a static HTML repor
 # When To Take Screenshots
 
 * After assertions
-* Before actions - unless that action leads to another screen
+* After actions - unless that action leads to another screen
 * On failure
 
 [.build-lists: true]
@@ -332,7 +339,7 @@ Spoon will run all of our instrumentation tests and build us a static HTML repor
 
 # Adding Screenshots To Our Robot
 
-```kotlin
+```kotlin, [.highlight: 2-3, 8-9, 14-15, 17]
 fun firstName(firstName: String): RegistrationRobot {
     onView(FIRST_NAME_INPUT_MATCHER).perform(clearText(), typeText(firstName), closeSoftKeyboard())
     takeScreenshot(spoon, "first_name_entered")
@@ -353,7 +360,15 @@ fun setFailureHandler(spoon: SpoonRule, context: Context) {
 }
 ```
 
-^ Since we already have each step broken out into a method in our robot, we can just add a screenshot to each one with a description. You can find the actual source code for this on GitHub which I'll like to at the end, if you're curious what the takeScreenshot method looks like. See how this follows along with what was discussed on the last slide.
+^ Since we already have each step broken out into a method in our robot, we can just add a screenshot to each one with a description. See how this follows along with what was discussed on the last slide.
+
+---
+
+# Why screenshots?
+
+* Human readable output
+* Shows exactly what was tested and how
+* Diagnose failures faster
 
 ---
 
@@ -361,13 +376,14 @@ fun setFailureHandler(spoon: SpoonRule, context: Context) {
 
 1. Use the robot pattern to make your tests more maintainable.
 2. Your actual tests become easier and quicker to write once you've created a robot.
-3. Robots can be leveraged for additional and more thorough. 
+3. Robots can be leveraged for additional and more thorough reporting. 
 4. This idea is not specific to Espresso or Spoon.
 
 ---
 
-# Repository
+# Contact
 
+* Twitter - @AdamMc331
 * https://github.com/AdamMc331/EspressoPatronum
 
 ^ This will take you to a sample project that uses the robot pattern and Spoon for testing. The README will have a link to the various resources used throughout this as well.
