@@ -80,7 +80,7 @@ footer: @AdamMc331<br/>@NYAndroidMeetup
 // or check an assertion.
 onView(ViewMatcher)
 	.perform(ViewAction)
-	.check(ViewAssetion)
+	.check(ViewAssertion)
 
 // Type into an EditText, verify it appears in a TextView
 onView(withId(R.id.etInput)).perform(typeText("Adam"))
@@ -212,7 +212,7 @@ fun testInvalidEmailError() {
 
 # Introducing Robots
 
-A robot is the middle man between your view and your code. This is a way of separating concerns just like an MVC/MVP/MVWTF architecture does with your application's code.
+A robot is the middle man between your view and your test code. This is a way of separating concerns just like an MVC/MVP/MVWTF architecture does with your application's code.
 
 ^ Now, if a view changes, all we have to do is change our robot. Our tests will tell the robot what to do without any care about what happens underneath.
 
@@ -299,90 +299,17 @@ class RegistrationRobot {
 
 ---
 
-# What Else?
-
----
-
-# Better Test Reporting
-
-Now that we've established the robot pattern for clean and maintainable tests, let's take it a step further.
-
----
-
-# Better Test Reporting Using Spoon[^3]
-
-Spoon will run all of our instrumentation tests and build us a static HTML report at the end.
-
-^ We can leverage a tool like Spoon to make more effective test reports. Spoon is a library built and maintained by Square.
-
-[^3]: https://github.com/square/spoon
-
----
-
-# Example Spoon Report
-
-![inline](images/test_invalid_email_error.png)
-
-^ This is an example of what a Spoon report would look like. What you're seeing here is our invalid email test with a screenshot of each step along the way. If I hover over a picture I'll see a description of that step. 
-
----
-
-# When To Take Screenshots
-
-* After assertions
-* After actions - unless that action leads to another screen
-* On failure
-
-[.build-lists: true]
-
----
-
-# Adding Screenshots To Our Robot
-
-```kotlin, [.highlight: 2-3, 8-9, 14-15, 17]
-fun firstName(firstName: String): RegistrationRobot {
-    onView(FIRST_NAME_INPUT_MATCHER).perform(clearText(), typeText(firstName), closeSoftKeyboard())
-    takeScreenshot(spoon, "first_name_entered")
-    return this
-}
-
-fun register(): RegistrationRobot {
-    takeScreenshot(spoon, "register_clicked")
-    onView(REGISTER_INPUT_MATCHER).perform(click())
-    return this
-}
-
-fun setFailureHandler(spoon: SpoonRule, context: Context) {
-    Espresso.setFailureHandler { error, viewMatcher ->
-        takeScreenshot(spoon, "test_failed")
-        DefaultFailureHandler(context).handle(error, viewMatcher)
-    }
-}
-```
-
-^ Since we already have each step broken out into a method in our robot, we can just add a screenshot to each one with a description. See how this follows along with what was discussed on the last slide.
-
----
-
-# Why screenshots?
-
-* Human readable output
-* Shows exactly what was tested and how
-* Diagnose failures faster
-
----
-
 # Takeaways
 
 1. Use the robot pattern to make your tests more maintainable.
 2. Your actual tests become easier and quicker to write once you've created a robot.
-3. Robots can be leveraged for additional and more thorough reporting. 
-4. This idea is not specific to Espresso or Spoon.
+4. This idea is not specific to Espresso.
 
 ---
 
 # Contact
 
+* Adam McNeilly - OkCupid (We're Hiring!)
 * Twitter - @AdamMc331
 * https://github.com/AdamMc331/EspressoPatronum
 
