@@ -36,6 +36,8 @@ class RegistrationTests {
                 .email("amcneilly@okcupid.com")
                 .phone("1234567890")
                 .register()
+
+        UserProfileRobot(spoon)
                 .assertFullNameDisplay("Adam McNeilly")
                 .assertEmailDisplay("amcneilly@okcupid.com")
                 .assertPhoneDisplay("(123)-456-7890")
