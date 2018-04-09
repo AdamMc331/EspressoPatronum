@@ -32,7 +32,7 @@ class UserProfileFragment : Fragment() {
     }
 
     companion object {
-        private val ARG_USER = "User"
+        private const val ARG_USER = "User"
 
         val FRAGMENT_TAG: String = UserProfileFragment::class.java.simpleName
 
