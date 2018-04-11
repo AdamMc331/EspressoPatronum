@@ -5,9 +5,9 @@ footer: @AdamMc331<br/>#ChicagoRoboto
 
 ## Espresso Patronum:<br/>The Magic of the Robot Pattern
 
-### Adam McNeilly: Android Engineer - OkCupid
+### Adam McNeilly
 
-^ Introduce yourself. Explain the need for robots. Overview of Espresso for new devs before explaining robot pattern and its benefits.
+^ Introduce yourself. Walk through talk.
 
 ---
 
@@ -29,7 +29,7 @@ footer: @AdamMc331<br/>#ChicagoRoboto
 2. ViewActions
 3. ViewAssertions
 
-^ In order to follow along with today's sample, there's three Espresso classes to be familiar with.
+^ Needed for examples.
 
 ---
 
@@ -40,7 +40,7 @@ footer: @AdamMc331<br/>#ChicagoRoboto
 - `isFocusable()`
 - `isChecked()`
 
-^ ViewMatchers are used to help Espresso find a view with certain characterstics, like a specific id, text, or flag like focusable/checked. Espresso will use these to see if a view is on the screen with these conditions, it may throw an exception if it's not.
+^ Find view. Must be visible.
 
 ---
 
@@ -51,7 +51,7 @@ footer: @AdamMc331<br/>#ChicagoRoboto
 - `swipeLeft()`
 - `click()`
 
-^ ViewActions are used to tell Espresso to perform an action on a View. This could range from typing text to an input to clicking a button. This is the fun part that replaces everything you're used to doing manually.
+^ Fun part. 
 
 ---
 
@@ -61,7 +61,7 @@ footer: @AdamMc331<br/>#ChicagoRoboto
 - `isLeftOf(Matcher)`
 - `doesNotExist()`
 
-^ These are used for the "testing" part of Espresso. Use these to make sure your view matches the characteristics that are expected. Examples include making sure a view is not on the screen, or that a view is displaying a certain piece of text.
+^ Testing part.
 
 ---
 
@@ -69,7 +69,7 @@ footer: @AdamMc331<br/>#ChicagoRoboto
 
 ![inline](images/espresso-cheatsheet.png)
 
-^ This is a quick cheatsheet that shows you the various classes involved in Espresso testing and the types of methods that fall within each one. It's a great resource to have while you're learning.
+^ Breakdown. Learning Resource.
 
 [^2]: https://developer.android.com/training/testing/espresso/cheat-sheet.html
 
@@ -85,7 +85,7 @@ onView(ViewMatcher)
 	.check(ViewAssertion)
 ```
 
-^ Walkthrough what's happening here, given what we've learned from the Espresso docs so far.
+^ Walkthrough. Docs so far. 
 
 ---
 
@@ -97,7 +97,7 @@ onView(withId(R.id.etInput)).perform(typeText("Adam"))
 onView(withId(R.id.tvOutput)).check(matches(withText("Adam")))
 ```
 
-^ Walkthrough what's happening here, given what we've learned from the Espresso docs so far.
+^ Walkthrough.
 
 ---
 
@@ -105,7 +105,7 @@ onView(withId(R.id.tvOutput)).check(matches(withText("Adam")))
 
 ![inline](images/sample_recording.gif)
 
-^ To demonstrate how the robot pattern saves us time, we'll consider automating this registration form. It has a registration fragment, which is then replaced by a UserProfile fragment.
+^ Explain Sample.
 
 ---
 
@@ -113,7 +113,7 @@ onView(withId(R.id.tvOutput)).check(matches(withText("Adam")))
 
 Before we introduce robots, let's take a look at the problem it solves.
 
-^ I also think it's best to explain the robot pattern by first demonstrating the problem it solves. Let's consider a couple tests you might write for this. Mine - Successful registration, empty field errors, and invalid field errors. Write these tests based on docs, and then talk about why we struggle.
+^ Consider tests. Write them. Explain why.
 
 ---
 
@@ -134,7 +134,7 @@ fun testSuccessfulRegistration() {
 }
 ```
 
-^ Walk through each of the steps here, calling out the verbosity. Espresso methods are well named, though.
+^ Walkthrough. Verbose but well named methods.
 
 ---
 
@@ -152,7 +152,7 @@ fun testMissingEmailError() {
 }
 ```
 
-^ We always want to negative test our apps too, right? Also pretty straight forward, but might not be immediately obvious what the difference is from our last test.
+^ Hard to see difference.
 
 ---
 
@@ -171,7 +171,7 @@ fun testInvalidEmailError() {
 }
 ```
 
-^ Not only do we want to verify an error for a missing field, but we might have to check if it's invalid as well. Also straight forward method names, but not obvious what's happening.
+^ Hard to see difference. Verbose, but well named.
 
 ---
 
@@ -213,7 +213,7 @@ fun testInvalidEmailError() {
 }
 ```
 
-^ As you can see, this code is incredibly hard to read, and not just because it's small.
+^ A lot of code. Not just small.
 
 ---
 
@@ -224,7 +224,7 @@ fun testInvalidEmailError() {
 
 [.build-lists: true]
 
-^ We've written so much code just to have three tests, and our tests aren't even that readable. They also aren't maintainable, because we have no separation of concerns.
+^ Lot of work for 3 tests. No separation.
 
 ---
 
@@ -232,7 +232,7 @@ fun testInvalidEmailError() {
 
 ![inline](images/mvp_overview.png)
 
-^ In a typical code base you'll have some architecture like MVP, which is used to separate concerns in your app. Model doesn't care about view. Can swap out parts. Not the case with tests.
+^ Explain architecture. Doesn't exist with tests.
 
 ---
 
@@ -240,7 +240,7 @@ fun testInvalidEmailError() {
 
 ![inline](images/mvp_with_tests.png)
 
-^ Our tests are so closely coupled to the view. As we add more, this really becomes a problem.
+^ Tests coupled to the view, becomes problem.
 
 ---
 
@@ -248,7 +248,7 @@ fun testInvalidEmailError() {
 
 ![inline](images/mvp_with_tests_changed.png)
 
-^ If we change something in our view, we have to go change every test.
+^ Change view, change tets.
 
 ---
 
@@ -256,7 +256,7 @@ fun testInvalidEmailError() {
 
 ![inline](images/mvp_with_robot.png)
 
-^ This is where we introduce robots. Robots are the middle man to separate concerns. 
+^ Middle man.
 
 ---
 
@@ -264,13 +264,13 @@ fun testInvalidEmailError() {
 
 ![inline](images/mvp_with_robot_changed.png)
 
-^ If something in our view changes, all we have to change is our robot. 
+^ Change view, change robot.
 
 ---
 
 > Write your automated tests as if you're telling a Quality Assurance Engineer what to do.
 
-^ Before we get to implementation, let's look at the usage. While we do this, think about how you might describe things to QA.
+^ Read. Usage, then explanation.
 
 ---
 
@@ -291,7 +291,7 @@ fun testSuccessfulRegistration() {
 }
 ```
 
-^ Explain what's happening here, and that all the ugly code was put into its own method which we'll see in a second.
+^ Like english.
 
 ---
 
@@ -314,7 +314,7 @@ class RegistrationRobot {
 }
 ```
 
-^ It's easiest to define each view matcher in a companion object (or a static field if you're using Java), so that they can all be managed in one place and easily changed.
+^ One place for matchers.
 
 ---
 
@@ -342,7 +342,7 @@ class RegistrationRobot {
 }
 ```
 
-^ We'll use the builder pattern to write a method for each action our robot can perform. The main benefit of using the builder pattern like this is so we can chain the calls together nicely as seen on the next slide.
+^ Builder pattern.
 
 ---
 
@@ -365,7 +365,7 @@ fun testSuccessfulRegistration() {
 }
 ```
 
-^ You should write on robot per activity or fragment that you work with. If you ever have a test that passes control from one fragment to another, it might be instinct to have your `register()` method return the new robot. Need to consider if this is /always/ the case.
+^ Only chain if consistently changing.
 
 ---
 
@@ -383,7 +383,7 @@ fun testMissingEmailError() {
 }
 ```
 
-^ For completion, here is what a negative test looks like.
+^ For completion.
 
 ---
 
@@ -395,13 +395,13 @@ fun testMissingEmailError() {
 
 [.build-lists: true]
 
-^ 1 - Clear english. 2 - Separated concerns. 3 - Now that you have all possible actions defined, it becomes a lot easier to write all of the possible permutations.
+^ 3 - Permutations.
 
 ---
 
 # What Else?
 
-^ So all of this is great, but it's not necessarily Espresso specific either. Let's go into some of the benefits we can get with Espresso. One of those is test reporting with screenshots, we'll talk a little bit about what and why, and then circle back to how and why it relates to the Robot pattern.
+^ Test reporting. Explain flow.
 
 ---
 
@@ -416,13 +416,13 @@ fun testMissingEmailError() {
 
 [^4]: https://github.com/jraska/Falcon/
 
-^ Spoon is a test reporting library built by Square that also allows us to take screenshots. Falcon takes better screenshots because it can capture dialogs though. If you want to learn more about the differences, I recommend Sam Edwards DCNYC '16 talk.
+^ Plug Sam.
 
 ---
 
 ![inline](images/espresso-spoon.png)
 
-^ Bear in mind, this may not always be the most Google friendly tool, so remember to add other keywords.
+^ Not SEO friendly.
 
 ---
 
@@ -430,7 +430,7 @@ fun testMissingEmailError() {
 
 ![inline](images/test_invalid_email_error.png)
 
-^ This is an example of what a Spoon report would look like. What you're seeing here is our invalid email test with a screenshot of each step along the way. If I hover over a picture I'll see a description of that step. The real benefits of this are the clear steps and human readable format, which we go more into later.
+^ Explain sample.
 
 ---
 
@@ -442,8 +442,6 @@ fun testMissingEmailError() {
 
 [.build-lists: true]
 
-^ If we're going to introduce screenshots to our tests, let's talk about when we would take them. 
-
 ---
 
 # Why screenshots?
@@ -454,7 +452,7 @@ fun testMissingEmailError() {
 
 [.build-lists: true]
 
-^ Why are screenshots important/why did I feel necessary to add them in here? How do they enhance what we've already talked about.
+^ Enhance existing work.
 
 ---
 
@@ -462,7 +460,7 @@ fun testMissingEmailError() {
 
 ![inline](images/console_output.png)
 
-^ Previously, we'd get a console output like this from Android Studio, which is really only accessible (and readable) by developers.
+^ Ugly. Developers only.
 
 ---
 
@@ -470,7 +468,7 @@ fun testMissingEmailError() {
 
 ![inline](images/spoon_overview.png)
 
-^ A spoon report, however, is very visual, not tech heavy, and can be shared amongst developers/QA/etc.
+^ Human readable. Sharable.
 
 ---
 
@@ -478,7 +476,7 @@ fun testMissingEmailError() {
 
 ![inline](images/successful_registration.png)
 
-^ The console output we have told us that we tested registration successfuly, but it never told us how.
+^ Console tells us what, not how.
 
 ---
 
@@ -486,7 +484,7 @@ fun testMissingEmailError() {
 
 ![inline](images/fullname_error.png)
 
-^ Using the old method, we were stuck debugging things with a stack trace.
+^ Ugly. Unreadable. Explain error.
 
 ---
 
@@ -494,7 +492,7 @@ fun testMissingEmailError() {
 
 ![inline](images/incorrect_full_name.png)
 
-^ However, if I take a screenshot automatically each time a test fails, I can figure out pretty instantly what happened.
+^ Instantly see error.
 
 ---
 
@@ -504,7 +502,7 @@ fun testMissingEmailError() {
 
 [^5]: https://www.youtube.com/watch?v=fhx_Ji5s3p4
 
-^ If you want to learn more about screenshots/why/the different tools, check out this talk by Sam Edwards.
+^ Comparisons of tools.
 
 ---
 
@@ -531,7 +529,7 @@ fun setFailureHandler(spoon: SpoonRule, context: Context) {
 }
 ```
 
-^ Since we already have each step broken out into a method in our robot, we can just add a screenshot to each one with a description. By this effect, we're getting all of these extra benefits I just discussed, with minimal effort because we've already designed our tests with an architecture optimized for this sort of thing.
+^ Minimal effort thanks to robot.
 
 ---
 
@@ -570,13 +568,11 @@ fun testSuccessfulRegistration() {
 
 ![inline](images/opt_in_preview.png)
 
-^ Let's show how easily we can extend this. Consider the example where your manager wants to add some opt in field. 
+^ Show how easy it is to expand.
 
 ---
 
 # RegistrationRobot
-
-Only requires one new method on registration.
 
 ```kotlin
 fun emailOptIn(): RegistrationRobot {
@@ -586,11 +582,11 @@ fun emailOptIn(): RegistrationRobot {
 }
 ```
 
+^ Only one new method on reg.
+
 ---
 
 # UserProfileRobot
-
-Only needs to consider each state.
 
 ```kotlin
 fun assertOptedIn(): UserProfileRobot {
@@ -606,11 +602,11 @@ fun assertOptedOut(): UserProfileRobot {
 }
 ```
 
+^ Only care about state.
+
 ---
 
 # Test
-
-Test now only requires two really quick add ons to consider.
 
 ```kotlin, [.highlight: 8, 15]
 @Test
@@ -631,6 +627,8 @@ fun testSuccessfulRegistrationWithOptIn() {
 }
 ```
 
+^ Only need two new lines.
+
 ---
 
 # Recap
@@ -646,10 +644,8 @@ fun testSuccessfulRegistrationWithOptIn() {
 
 ---
 
-# Contact
+# Example
 
-* Adam McNeilly - OkCupid (We're Hiring!)
-* Twitter - @AdamMc331
-* https://github.com/AdamMc331/EspressoPatronum
+> https://github.com/AdamMc331/EspressoPatronum
 
 ^ This will take you to a sample project that uses the robot pattern and Spoon for testing. The README will have a link to the various resources used throughout this as well.
