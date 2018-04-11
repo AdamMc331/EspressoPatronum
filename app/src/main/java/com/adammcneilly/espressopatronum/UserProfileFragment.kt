@@ -29,6 +29,7 @@ class UserProfileFragment : Fragment() {
         tvFullName.text = user.fullName
         tvEmailAddress.text = user.emailAddress
         tvPhoneNumber.text = user.formattedPhoneNumber
+        cbOptedIn.isChecked = user.optedIn
     }
 
     companion object {

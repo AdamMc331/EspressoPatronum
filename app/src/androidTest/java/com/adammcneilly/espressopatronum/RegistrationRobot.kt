@@ -36,6 +36,12 @@ class RegistrationRobot(private val spoon: SpoonRule) {
         return this
     }
 
+    fun emailOptIn(): RegistrationRobot {
+        onView(OPT_IN_MATCHER).perform(click())
+        takeScreenshot(spoon, "opted_in")
+        return this
+    }
+
     fun register(): RegistrationRobot {
         takeScreenshot(spoon, "register_clicked")
         onView(REGISTER_INPUT_MATCHER).perform(click())
@@ -53,6 +59,7 @@ class RegistrationRobot(private val spoon: SpoonRule) {
         private val LAST_NAME_INPUT_MATCHER = withId(R.id.etLastName)
         private val EMAIL_INPUT_MATCHER = withId(R.id.etEmail)
         private val PHONE_INPUT_MATCHER = withId(R.id.etPhone)
+        private val OPT_IN_MATCHER = withId(R.id.rbEmailOptIn)
         private val REGISTER_INPUT_MATCHER = withId(R.id.registerButton)
     }
 }

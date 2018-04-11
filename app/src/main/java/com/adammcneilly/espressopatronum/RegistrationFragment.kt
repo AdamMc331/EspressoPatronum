@@ -33,7 +33,8 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
                             etFirstName.text.toString(),
                             etLastName.text.toString(),
                             etEmail.text.toString(),
-                            etPhone.text.toString()
+                            etPhone.text.toString(),
+                            rbEmailOptIn.isChecked
                     )
 
                     callback.onUserRegistered(user)

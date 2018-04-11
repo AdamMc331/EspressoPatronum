@@ -11,7 +11,8 @@ data class User(
         var firstName: String = "",
         var lastName: String = "",
         var emailAddress: String = "",
-        var phoneNumber: String = "") : Parcelable {
+        var phoneNumber: String = "",
+        var optedIn: Boolean = false) : Parcelable {
 
     val fullName: String
         get() = "$firstName $lastName"

@@ -564,6 +564,75 @@ fun testSuccessfulRegistration() {
 
 ---
 
+# Let's Add To It
+
+> Your manager just came by and asked for an email opt in field.
+
+![inline](images/opt_in_preview.png)
+
+^ Let's show how easily we can extend this. Consider the example where your manager wants to add some opt in field. 
+
+---
+
+# RegistrationRobot
+
+Only requires one new method on registration.
+
+```kotlin
+fun emailOptIn(): RegistrationRobot {
+    onView(OPT_IN_MATCHER).perform(click())
+    takeScreenshot(spoon, "opted_in")
+    return this
+}
+```
+
+---
+
+# UserProfileRobot
+
+Only needs to consider each state.
+
+```kotlin
+fun assertOptedIn(): UserProfileRobot {
+    onView(EMAIL_OPT_IN_DISPLAY_MATCHER).check(matches(isChecked()))
+    takeScreenshot(spoon, "assert_email_opt_in")
+    return this
+}
+
+fun assertOptedOut(): UserProfileRobot {
+    onView(EMAIL_OPT_IN_DISPLAY_MATCHER).check(matches(isNotChecked()))
+    takeScreenshot(spoon, "assert_email_opt_out")
+    return this
+}
+```
+
+---
+
+# Test
+
+Test now only requires two really quick add ons to consider.
+
+```kotlin, [.highlight: 8, 15]
+@Test
+fun testSuccessfulRegistrationWithOptIn() {
+    RegistrationRobot(spoon)
+            .firstName("Adam")
+            .lastName("McNeilly")
+            .email("amcneilly@okcupid.com")
+            .phone("1234567890")
+            .emailOptIn()
+            .register()
+
+    UserProfileRobot(spoon)
+            .assertFullNameDisplay("Adam McNeilly")
+            .assertEmailDisplay("amcneilly@okcupid.com")
+            .assertPhoneDisplay("(123)-456-7890")
+            .assertOptedIn()
+}
+```
+
+---
+
 # Recap
 
 1. Use robots to solve separation of concerns problem

@@ -12,4 +12,6 @@
     <string name="welcome">WELCOME!</string>
     <string name="err_invalid_email">Must enter a valid email address.</string>
     <string name="err_invalid_phone_number">Must enter a valid phone number.</string>
+    <string name="email_opt_in">Email Opt In</string>
+    <string name="opted_in">Opted In</string>
 </resources>

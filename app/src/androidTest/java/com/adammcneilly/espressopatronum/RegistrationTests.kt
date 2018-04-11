@@ -29,7 +29,24 @@ class RegistrationTests {
     }
 
     @Test
-    fun testSuccessfulRegistration() {
+    fun testSuccessfulRegistrationWithOptIn() {
+        RegistrationRobot(spoon)
+                .firstName("Adam")
+                .lastName("McNeilly")
+                .email("amcneilly@okcupid.com")
+                .phone("1234567890")
+                .emailOptIn()
+                .register()
+
+        UserProfileRobot(spoon)
+                .assertFullNameDisplay("Adam McNeilly")
+                .assertEmailDisplay("amcneilly@okcupid.com")
+                .assertPhoneDisplay("(123)-456-7890")
+                .assertOptedIn()
+    }
+
+    @Test
+    fun testSuccessfulRegistrationWithoutOptIn() {
         RegistrationRobot(spoon)
                 .firstName("Adam")
                 .lastName("McNeilly")
@@ -41,6 +58,7 @@ class RegistrationTests {
                 .assertFullNameDisplay("Adam McNeilly")
                 .assertEmailDisplay("amcneilly@okcupid.com")
                 .assertPhoneDisplay("(123)-456-7890")
+                .assertOptedOut()
     }
 
     @Test

@@ -49,4 +49,16 @@
         app:layout_constraintTop_toBottomOf="@id/tvEmailAddress"
         tools:text="123-456-7890" />
 
+    <CheckBox
+        android:id="@+id/cbOptedIn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:clickable="false"
+        android:text="@string/opted_in"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber" />
+
 </android.support.constraint.ConstraintLayout>
