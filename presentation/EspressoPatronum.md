@@ -410,13 +410,11 @@ fun testMissingEmailError() {
  - Spoon[^3] will run all of our instrumentation tests and build us a static HTML report at the end.
  - Falcon[^4] takes better screenshots, and has a `SpoonCompat` library for the best of both worlds.
 
-^ We can leverage a tool like Spoon to make more effective test reports. Spoon is a library built and maintained by Square.
+^ Leverage for reports. Spoon by square. Falcon by Josef Raska(?). Walkthrough when/why then how.
 
 [^3]: https://github.com/square/spoon
 
 [^4]: https://github.com/jraska/Falcon/
-
-^ Plug Sam.
 
 ---
 
@@ -452,7 +450,7 @@ fun testMissingEmailError() {
 
 [.build-lists: true]
 
-^ Enhance existing work.
+^ All of these enhance existing tests.
 
 ---
 
@@ -468,7 +466,7 @@ fun testMissingEmailError() {
 
 ![inline](images/spoon_overview.png)
 
-^ Human readable. Sharable.
+^ Human readable. Sharable. STEPS NEXT.
 
 ---
 
@@ -476,7 +474,7 @@ fun testMissingEmailError() {
 
 ![inline](images/successful_registration.png)
 
-^ Console tells us what, not how.
+^ Console is what, not how.
 
 ---
 
@@ -566,7 +564,7 @@ fun testSuccessfulRegistration() {
 
 > Your manager just came by and asked for an email opt in field.
 
-![inline](images/opt_in_preview.png)
+![inline](images/opt_in_preview.jpeg)
 
 ^ Show how easy it is to expand.
 
