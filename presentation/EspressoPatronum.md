@@ -5,7 +5,7 @@ footer: @AdamMc331<br/>#ChicagoRoboto
 
 ## Espresso Patronum:<br/>The Magic of the Robot Pattern
 
-### Adam McNeilly
+### Adam McNeilly - @AdamMc331
 
 ^ Introduce yourself. Walk through talk.
 
@@ -25,9 +25,9 @@ footer: @AdamMc331<br/>#ChicagoRoboto
 
 # Three Classes To Know
 
-1. ViewMatchers
-2. ViewActions
-3. ViewAssertions
+- ViewMatchers
+- ViewActions
+- ViewAssertions
 
 ^ Needed for examples.
 
@@ -219,8 +219,8 @@ fun testInvalidEmailError() {
 
 # The Problem
 
-1. Extremely Verbose & Unreadable
-2. Not Easy To Maintain
+- Extremely Verbose & Unreadable
+- Not Easy To Maintain
 
 [.build-lists: true]
 
@@ -389,9 +389,9 @@ fun testMissingEmailError() {
 
 # Benefits
 
-1. Readibility
-2. Maintainability & Separation Of Concerns
-3. Tests Become Easier To Write
+- Readibility
+- Maintainability & Separation Of Concerns
+- Tests Become Easier To Write
 
 [.build-lists: true]
 
@@ -434,9 +434,9 @@ fun testMissingEmailError() {
 
 # When To Take Screenshots
 
-* After assertions
-* After actions - unless that action leads to another screen
-* On failure
+- After assertions
+- After actions - unless that action leads to another screen
+- On failure
 
 [.build-lists: true]
 
@@ -444,9 +444,9 @@ fun testMissingEmailError() {
 
 # Why screenshots?
 
-* Human readable output
-* See exactly how things were tested
-* Diagnose failures quicker
+- Human readable output
+- See exactly how things were tested
+- Diagnose failures quicker
 
 [.build-lists: true]
 
@@ -506,7 +506,7 @@ fun testMissingEmailError() {
 
 # Adding Screenshots To Our Robot
 
-```kotlin, [.highlight: 2-3, 8-9, 14-15, 17]
+```kotlin, [.highlight: 2-3, 8-9, 13-18]
 fun firstName(firstName: String): RegistrationRobot {
     onView(FIRST_NAME_INPUT_MATCHER).perform(clearText(), typeText(firstName), closeSoftKeyboard())
     takeScreenshot(spoon, "first_name_entered")
@@ -631,10 +631,10 @@ fun testSuccessfulRegistrationWithOptIn() {
 
 # Recap
 
-1. Use robots to solve separation of concerns problem
-2. Makes your tests more readable and fun to write
-3. Leverage this for better reporting
-4. This is not specific to Espresso/Spoon/Falcon. 
+- Use robots to solve separation of concerns problem
+- Makes your tests more readable and fun to write
+- Leverage this for better reporting
+- This is not specific to Espresso/Spoon/Falcon
 
 [.build-lists: true]
 
