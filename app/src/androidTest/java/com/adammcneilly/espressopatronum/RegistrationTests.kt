@@ -1,6 +1,9 @@
 package com.adammcneilly.espressopatronum
 
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.support.test.rule.ActivityTestRule
+import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
 import com.adammcneilly.espressopatronum.TestUtils.setFailureHandler
 import com.squareup.spoon.SpoonRule
@@ -19,6 +22,10 @@ class RegistrationTests {
     @Rule
     val rule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
 
+    @JvmField
+    @Rule
+    val mPermissionsRule = GrantPermissionRule.grant(WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE)
+    
     @JvmField
     @Rule
     val spoon: SpoonRule = SpoonRule()
