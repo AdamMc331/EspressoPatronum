@@ -124,12 +124,12 @@ Before we introduce robots, let's take a look at the problem it solves.
 fun testSuccessfulRegistration() {
     onView(withId(R.id.etFirstName)).perform(typeText("Adam"))
     onView(withId(R.id.etLastName)).perform(typeText("McNeilly"))
-    onView(withId(R.id.etEmail)).perform(typeText("amcneilly@gmail.com"))
+    onView(withId(R.id.etEmail)).perform(typeText("adam@testing.com"))
     onView(withId(R.id.etPhone)).perform(typeText("1234567890"))
     onView(withId(R.id.registerButton)).perform(click())
 
     onView(withId(R.id.tvFullName)).check(matches(withText("Adam McNeilly")))
-    onView(withId(R.id.tvEmailAddress)).check(matches(withText("amcneilly@gmail.com")))
+    onView(withId(R.id.tvEmailAddress)).check(matches(withText("adam@testing.com")))
     onView(withId(R.id.tvPhoneNumber)).check(matches(withText("(123)-456-7890")))
 }
 ```
@@ -182,12 +182,12 @@ fun testInvalidEmailError() {
 fun testSuccessfulRegistration() {
     onView(withId(R.id.etFirstName)).perform(typeText("Adam"))
     onView(withId(R.id.etLastName)).perform(typeText("McNeilly"))
-    onView(withId(R.id.etEmail)).perform(typeText("amcneilly@gmail.com"))
+    onView(withId(R.id.etEmail)).perform(typeText("adam@testing.com"))
     onView(withId(R.id.etPhone)).perform(typeText("1234567890"))
     onView(withId(R.id.registerButton)).perform(click())
 
     onView(withId(R.id.tvFullName)).check(matches(withText("Adam McNeilly")))
-    onView(withId(R.id.tvEmailAddress)).check(matches(withText("amcneilly@gmail.com")))
+    onView(withId(R.id.tvEmailAddress)).check(matches(withText("adam@testing.com")))
     onView(withId(R.id.tvPhoneNumber)).check(matches(withText("(123)-456-7890")))
 }
 
@@ -282,11 +282,11 @@ fun testSuccessfulRegistration() {
     RegistrationRobot()
             .firstName("Adam")
             .lastName("McNeilly")
-            .email("amcneilly@gmail.com")
+            .email("adam@testing.com")
             .phone("1234567890")
             .register()
             .assertFullNameDisplay("Adam McNeilly")
-            .assertEmailDisplay("amcneilly@gmail.com")
+            .assertEmailDisplay("adam@testing.com")
             .assertPhoneDisplay("(123)-456-7890")
 }
 ```
@@ -354,13 +354,13 @@ fun testSuccessfulRegistration() {
     RegistrationRobot()
             .firstName("Adam")
             .lastName("McNeilly")
-            .email("amcneilly@gmail.com")
+            .email("adam@testing.com")
             .phone("1234567890")
             .register()
 
     UserProfileRobot()
             .assertFullNameDisplay("Adam McNeilly")
-            .assertEmailDisplay("amcneilly@gmail.com")
+            .assertEmailDisplay("adam@testing.com")
             .assertPhoneDisplay("(123)-456-7890")
 }
 ```
@@ -540,7 +540,7 @@ fun testSuccessfulRegistration() {
     takeScreenshot(spoon, "first_name_entered")
     onView(withId(R.id.etLastName)).perform(typeText("McNeilly"))
     takeScreenshot(spoon, "last_name_entered")
-    onView(withId(R.id.etEmail)).perform(typeText("amcneilly@gmail.com"))
+    onView(withId(R.id.etEmail)).perform(typeText("adam@testing.com"))
     takeScreenshot(spoon, "email_entered")
     onView(withId(R.id.etPhone)).perform(typeText("1234567890"))
     takeScreenshot(spoon, "phone_entered")
@@ -549,7 +549,7 @@ fun testSuccessfulRegistration() {
 
     onView(withId(R.id.tvFullName)).check(matches(withText("Adam McNeilly")))
     takeScreenshot(spoon, "full_name_displayed")
-    onView(withId(R.id.tvEmailAddress)).check(matches(withText("amcneilly@gmail.com")))
+    onView(withId(R.id.tvEmailAddress)).check(matches(withText("adam@testing.com")))
     takeScreenshot(spoon, "email_displayed")
     onView(withId(R.id.tvPhoneNumber)).check(matches(withText("(123)-456-7890")))
     takeScreenshot(spoon, "phone_displayed")
@@ -612,14 +612,14 @@ fun testSuccessfulRegistrationWithOptIn() {
     RegistrationRobot(spoon)
             .firstName("Adam")
             .lastName("McNeilly")
-            .email("amcneilly@gmail.com")
+            .email("adam@testing.com")
             .phone("1234567890")
             .emailOptIn()
             .register()
 
     UserProfileRobot(spoon)
             .assertFullNameDisplay("Adam McNeilly")
-            .assertEmailDisplay("amcneilly@gmail.com")
+            .assertEmailDisplay("adam@testing.com")
             .assertPhoneDisplay("(123)-456-7890")
             .assertOptedIn()
 }

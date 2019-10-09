@@ -40,14 +40,14 @@ class RegistrationTests {
         RegistrationRobot(spoon)
                 .firstName("Adam")
                 .lastName("McNeilly")
-                .email("amcneilly@gmail.com")
+                .email("adam@testing.com")
                 .phone("1234567890")
                 .emailOptIn()
                 .register()
 
         UserProfileRobot(spoon)
                 .assertFullNameDisplay("Adam McNeilly")
-                .assertEmailDisplay("amcneilly@gmail.com")
+                .assertEmailDisplay("adam@testing.com")
                 .assertPhoneDisplay("(123)-456-7890")
                 .assertOptedIn()
     }
@@ -57,13 +57,13 @@ class RegistrationTests {
         RegistrationRobot(spoon)
                 .firstName("Adam")
                 .lastName("McNeilly")
-                .email("amcneilly@gmail.com")
+                .email("adam@testing.com")
                 .phone("1234567890")
                 .register()
 
         UserProfileRobot(spoon)
                 .assertFullNameDisplay("Adam McNeilly")
-                .assertEmailDisplay("amcneilly@gmail.com")
+                .assertEmailDisplay("adam@testing.com")
                 .assertPhoneDisplay("(123)-456-7890")
                 .assertOptedOut()
     }
