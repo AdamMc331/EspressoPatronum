@@ -12,24 +12,24 @@ import kotlinx.android.synthetic.main.fragment_user_profile.*
  */
 class UserProfileFragment : Fragment() {
 
-    private var user: User = User()
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        user = arguments.getParcelable(ARG_USER)
+        user = arguments?.getParcelable(ARG_USER)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater?.inflate(R.layout.fragment_user_profile, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+            inflater.inflate(R.layout.fragment_user_profile, container, false)
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvFullName.text = user.fullName
-        tvEmailAddress.text = user.emailAddress
-        tvPhoneNumber.text = user.formattedPhoneNumber
-        cbOptedIn.isChecked = user.optedIn
+        tvFullName.text = user?.fullName
+        tvEmailAddress.text = user?.emailAddress
+        tvPhoneNumber.text = user?.formattedPhoneNumber
+        cbOptedIn.isChecked = user?.optedIn == true
     }
 
     companion object {
