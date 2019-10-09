@@ -2,9 +2,9 @@ package com.adammcneilly.espressopatronum
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-import android.support.test.rule.ActivityTestRule
-import android.support.test.rule.GrantPermissionRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.adammcneilly.espressopatronum.TestUtils.setFailureHandler
 import com.squareup.spoon.SpoonRule
 import org.junit.Before

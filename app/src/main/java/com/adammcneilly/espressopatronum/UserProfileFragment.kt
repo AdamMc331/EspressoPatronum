@@ -1,7 +1,7 @@
 package com.adammcneilly.espressopatronum
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.fragment_user_profile.*
 /**
  * Simple fragment for displaying a user's profile.
  */
-class UserProfileFragment : Fragment() {
+class UserProfileFragment : androidx.fragment.app.Fragment() {
 
     private var user: User? = null
 

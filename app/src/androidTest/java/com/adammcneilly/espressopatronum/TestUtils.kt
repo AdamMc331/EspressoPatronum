@@ -2,11 +2,11 @@ package com.adammcneilly.espressopatronum
 
 import android.app.Activity
 import android.content.Context
-import android.support.test.InstrumentationRegistry.getInstrumentation
-import android.support.test.espresso.Espresso
-import android.support.test.espresso.base.DefaultFailureHandler
-import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
-import android.support.test.runner.lifecycle.Stage
+import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.base.DefaultFailureHandler
+import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
+import androidx.test.runner.lifecycle.Stage
 import com.squareup.spoon.SpoonRule
 
 
