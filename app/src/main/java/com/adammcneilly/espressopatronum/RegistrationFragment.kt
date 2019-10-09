@@ -1,7 +1,7 @@
 package com.adammcneilly.espressopatronum
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.fragment_registration.*
 /**
  * Fragment containing a form for registration.
  */
-class RegistrationFragment : Fragment(), View.OnClickListener {
+class RegistrationFragment : androidx.fragment.app.Fragment(), View.OnClickListener {
 
     private val callback: OnUserRegisteredListener by lazy { activity as OnUserRegisteredListener }
 
