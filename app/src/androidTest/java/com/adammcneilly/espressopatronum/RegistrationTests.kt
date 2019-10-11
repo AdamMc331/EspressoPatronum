@@ -37,13 +37,14 @@ class RegistrationTests {
 
     @Test
     fun testSuccessfulRegistrationWithOptIn() {
-        RegistrationRobot(spoon)
-                .firstName("Adam")
-                .lastName("McNeilly")
-                .email("adam@testing.com")
-                .phone("1234567890")
-                .emailOptIn()
-                .register()
+        registration(spoon) {
+            firstName("Adam")
+            lastName("McNeilly")
+            email("adam@testing.com")
+            phone("1234567890")
+            emailOptIn()
+            register()
+        }
 
         UserProfileRobot(spoon)
                 .assertFullNameDisplay("Adam McNeilly")
