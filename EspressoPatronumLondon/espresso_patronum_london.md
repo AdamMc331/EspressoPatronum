@@ -252,7 +252,7 @@ class RegistrationRobot {
 
 ---
 
-# One Method For Each Action Or Assertion
+# One Method For Each Action
 
 ```kotlin
 class RegistrationRobot {
@@ -262,8 +262,22 @@ class RegistrationRobot {
         return this
     }
 
-    fun register() = apply {
+    fun register(): RegistrationRobot {
         onView(REGISTER_INPUT_MATCHER).perform(click())
+        return this
+    }
+}
+```
+
+---
+
+# One Method For Each Assertion
+
+```kotlin
+class RegistrationRobot {
+
+    fun assertEmailDisplay(email: String) = apply {
+        onView(EMAIL_DISPLAY_MATCHER).check(matches(withText(email)))
     }
 
     fun assertEmailError(error: String) = apply {
