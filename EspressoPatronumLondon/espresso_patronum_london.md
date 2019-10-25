@@ -614,3 +614,9 @@ class UserViewModelRobot {
     - Don't chain robots
     - Don't include any logic in the robot methods
 - This concept is not specific to Espresso, or UI testing
+
+---
+
+# Thank You!
+
+Sample App & Slides: https://github.com/AdamMc331/EspressoPatronum
