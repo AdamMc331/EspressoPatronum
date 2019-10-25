@@ -401,7 +401,7 @@ fun register(): UserProfileRobot {
 // Unable to run negative tests now
 @Test
 fun testMissingEmailError() {
-    RegistrationRobot(spoon)
+    RegistrationRobot()
             .register()
             .assertEmailError("Must enter an email address.") // Undefined Method
 }
@@ -440,6 +440,172 @@ class UserProfileRobot {
 
 ---
 
+# Unit Testing With Robots
+
+---
+
+# ViewModel Example
+
+```kotlin
+class UserViewModel(
+    private val repository: UserRepository
+): ViewModel() {
+    val state = MutableLiveData<NetworkState<User>>()
+    
+    fun fetchUser() {
+        repository
+            .fetchUser()
+            .subscribe(
+                { user ->
+                    state.value = NetworkState.Loaded(user)
+                },
+                { error ->
+                    state.value = NetworkState.Error(error)
+                }
+            )
+    }
+}
+```
+
+---
+
+# You May Write Tests This Way
+
+```kotlin
+@Test
+fun successfulFetch() {
+    val mockRepository = mock(UserRepository::class.java)
+    val sampleUser = User("Adam")
+    whenever(mockRepository.fetchUser()).thenReturn(Single.just(sampleUser))
+    
+    val viewModel = UserViewModel(mockRepository)
+    viewModel.fetchUser()
+    val currentState = viewModel.state.testObserver().observedValue
+    assertEquals(NetworkState.Loaded(sampleUser), currentState)
+}
+```
+
+^ Same separation of concerns problem. What if I move state from LiveData to Rx type?
+
+---
+
+# Create A Robot Here Too
+
+```kotlin
+class UserViewModelRobot {
+    private val mockRepository = mock(UserRepository::class.java)
+    private val viewModel = UserViewModel(mockRepository)
+    
+    fun mockUserResponse(user: User) = apply {
+        val response = Single.just(user)
+        whenever(mockRepository.fetchUser()).thenReturn(response)
+    }
+    
+    fun fetchUser() = apply {
+        viewModel.fetchUser()
+    }
+    
+    fun assertState(expectedState: NetworkState<User>) = apply {
+        val currentState = viewModel.state.testObserver().observedValue
+        assertEquals(expectedState, currentState)
+    }
+}
+```
+
+---
+
+# Implement Robot
+
+```kotlin
+class UserViewModelTest {
+    private lateinit var testRobot: UserViewModelRobot
+
+    @Before
+    fun setUp() {
+        // Robot should be specific to each test
+        testRobot = UserViewModelRobot()
+    }
+
+    @Test
+    fun successfulFetch() {
+        val sampleUser = User("Adam")
+        
+        testRobot
+            .mockUserResponse(sampleUser)
+            .fetchUser()
+            .assertState(NetworkState.Loaded(sampleUser))
+    }
+}
+```
+
+---
+
+# Easy To Add Error Test
+
+```kotlin
+class UserViewModelRobot {
+    // ...
+
+    fun mockUserError(error: Throwable?) = apply {
+        val response = Single.error<User>(error)
+        whenever(mockRepository.fetchUser()).thenReturn(response)
+    }
+}
+
+class UserViewModelTest {
+    // ...
+
+    @Test
+    fun failureFetch() {
+        val sampleError = Throwable("Whoops")
+
+        testRobot
+            .mockUserError(sampleError)
+            .fetchUser()
+            .assertState(NetworkState.Error(sampleError))
+    }
+}
+```
+
+---
+
+# Let's See It In Action
+
+---
+
+# Update Our ViewModel
+
+```kotlin
+class UserViewModel(
+    private val repository: UserRepository
+): ViewModel() {
+    // val state = MutableLiveData<NetworkState<User>>()
+    val state: BehaviorSubject<NetworkState<User>> = BehaviorSubject.create()
+}
+```
+
+---
+
+# Update One Robot Method
+
+```kotlin
+class UserViewModelRobot {
+    fun assertState(expectedState: NetworkState<User>) = apply {
+        // val currentState = viewModel.state.testObserver().observedValue
+        val currentState = viewModel.state.value
+        assertEquals(expectedState, currentState)
+    }
+}
+```
+
+---
+
+# Everything Is Passing Again
+
+![inline](images/tests_passing.png)
+
+---
+
 # Recap
 
 - Utilize robot pattern for more readable and maintainable tests
@@ -447,4 +613,4 @@ class UserProfileRobot {
 - Don't code yourself into a corner with additional complexity
     - Don't chain robots
     - Don't include any logic in the robot methods
-- This concept is not specific to Espresso
+- This concept is not specific to Espresso, or UI testing
